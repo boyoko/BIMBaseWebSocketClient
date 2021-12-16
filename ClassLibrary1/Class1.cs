@@ -6,9 +6,10 @@ namespace testBackEndCsharp
 {
     public class Class1
     {
-        WSocketClientHelper _wSocketClient = new WSocketClientHelper("wss://localhost:5001/ws");
-        public Class1()
+        private readonly WSocketClientHelper _wSocketClient;
+        public Class1(string wsUrl = "wss://localhost:5001/ws")
         {
+            _wSocketClient = new WSocketClientHelper(wsUrl);
             _wSocketClient.OnOpen -= WSocketClient_OnOpen;
             _wSocketClient.OnMessage -= WSocketClient_OnMessage;
             _wSocketClient.OnClose -= WSocketClient_OnClose;
@@ -18,6 +19,7 @@ namespace testBackEndCsharp
             _wSocketClient.OnMessage += WSocketClient_OnMessage;
             _wSocketClient.OnClose += WSocketClient_OnClose;
             _wSocketClient.OnError += WSocketClient_OnError;
+            
             _wSocketClient.Open();
         }
 
